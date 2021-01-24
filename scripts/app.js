@@ -46,5 +46,5 @@ const chatroom = new Chatroom('general', username)
 
 
 //get the chat and render
-chatroom.getChat((data) => chatUI.render(data))
+chatroom.getChat( data => chatUI.render(data))
 
