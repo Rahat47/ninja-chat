@@ -1,19 +1,13 @@
-// adding new chat documents
-// setting up a real-time listener to get new chats
-// updating the username
-// updating the room
-
 class Chatroom {
-    constructor(room, username){
-        this.room = room
+    constructor(username, room) {
         this.username = username
+        this.room = room
         this.chats = db.collection('chats')
         this.unsub
     }
-
-    //add new chat
+    //Method to add a new Chat
     async addChat(message) {
-        //format a chat object for firebase
+        //format a chat object
         const now = new Date()
         const chat = {
             message,
@@ -21,38 +15,35 @@ class Chatroom {
             room: this.room,
             created_at: firebase.firestore.Timestamp.fromDate(now)
         }
-        //save the chat to the database
+        //save the chat document
         const response = await this.chats.add(chat)
         return response
     }
-    //getting chat from the db
-    getChat(callback) {
-        this.unsub = this.chats
+    //method to get chat from db
+    getChats(callback){
+       this.unsub = this.chats
             .where('room', '==', this.room)
             .orderBy('created_at')
             .onSnapshot(snapshot => {
                 snapshot.docChanges().forEach(change => {
                     if(change.type === 'added') {
-                        // update the UI
+                        //update the ui
                         callback(change.doc.data())
                     }
                 })
             })
     }
-    //updating the name
+    //method to change the username
     updateName(username) {
         this.username = username
         localStorage.setItem('username', username)
     }
-
-    //update the chat room 
-    updateRoom(room) {
+    //method to update the room
+    updateRoom(room){
         this.room = room
-        if(this.unsub) {
+        console.log('room updated')
+        if(this.unsub){
             this.unsub()
         }
     }
 }
-
-
-

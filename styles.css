@@ -7,14 +7,19 @@
   outline: none !important;
   box-shadow: none !important;
 }
+.btn:hover,.btn.clicked{
+  background: crimson;
+  color: white;
+}
+
 .btn:focus{
   outline: none !important;
 }
-.btn:hover{
-  background: crimson;
-  color: white
+.chat-list{
+  border-top: 1px solid #cccccc;
+  max-height: 80vh;
+  overflow: auto;
 }
-
 .username {
   font-weight: bold;
   color: crimson;
@@ -23,12 +28,13 @@
   font-size: 0.7em;
   color: #999999;
 }
-.update-mssg {
+.update-msg {
   text-align: center;
   margin: 20px auto;
+  color: #000;
 }
-.text-bold{
+.new-name {
+  color: crimson;
   font-weight: bold;
   font-size: 1.2em;
-  color: crimson;
 }
